@@ -31,7 +31,6 @@ pipeline {
                         body: 'Please go to ${BUILD_URL} and verify the build.',
                         compressLog: true,
                         recipientProviders: [upstreamDevelopers(), requestor()],
-                        to: "test@jenkins",
                         subject: "JOB \'${JOB_NAME}\' (${BUILD_NUMBER}) is waiting for input"
                 }
             }
