@@ -25,6 +25,14 @@ pipeline {
                     junit '**/target/surefire-reports/TEST-*.xml'
                     archiveArtifacts 'target/*.jar'
                 }
+
+                failure {
+                    emailext attachLog: true,
+                        body: 'Please go to ${BUILD_URL} and verify the build.',
+                        compressLog: true,
+                        recipientProviders: [upstreamDevelopers(), requestor()],
+                        subject: 'JOB \'${JOB_NAME}\' (${BUILD_NUMBER}) is waiting for input'
+                }
             }
         }
     }
